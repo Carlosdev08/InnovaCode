@@ -1,7 +1,7 @@
 let mapInstance = null;
 let directionsRenderer = null;
 let userMarker = null;
-let infoWindow = null; // Aquí guardamos el InfoWindow
+let infoWindow = null;
 
 export function setMap(map) {
   mapInstance = map;
@@ -21,7 +21,7 @@ export function getDirectionsRenderer() {
 
 export default function initMap() {
   const defaultLocation = { lat: 40.4168, lng: -3.7038 }; // Madrid
-  const mapElement = $("#map")[0];
+  const mapElement = document.getElementById("map");
 
   if (!mapElement) {
     console.error("No se encontró el div con id='map'");
@@ -41,7 +41,6 @@ export default function initMap() {
 
   console.log("Mapa y DirectionsRenderer inicializados.");
 
-  // 👉 Escuchamos el botón de ubicación
   const btnUbicacion = document.getElementById("btnMiUbicacion");
   btnUbicacion.addEventListener("click", () => {
     centrarEnMiUbicacion(map);
@@ -60,7 +59,6 @@ function centrarEnMiUbicacion(map) {
         map.setCenter(userLocation);
         map.setZoom(15);
 
-        // Si ya existe el marcador, lo movemos
         if (userMarker) {
           userMarker.setPosition(userLocation);
         } else {
@@ -70,23 +68,21 @@ function centrarEnMiUbicacion(map) {
             title: "Ubicación de InnovaCode",
             icon: {
               url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-              scaledSize: new google.maps.Size(40, 40),
+              scaledSize: new google.maps.Size(50, 40),
             },
           });
         }
 
-        // Crea el InfoWindow si no existe
         if (!infoWindow) {
           infoWindow = new google.maps.InfoWindow({
             content: `
-  <div style="font-weight: bold; color: #007bff; text-align: center;">
-    Aquí está InnovaCode 🚀
-  </div>
-`,
+              <div style="font-weight: bold; color: #007bff; text-align: center;">
+                Aquí está InnovaCode 🚀
+              </div>
+            `,
           });
         }
 
-        // Añade el evento click al marcador para mostrar el InfoWindow
         userMarker.addListener("click", () => {
           infoWindow.open(map, userMarker);
         });
@@ -95,10 +91,14 @@ function centrarEnMiUbicacion(map) {
       },
       (error) => {
         console.error("Error obteniendo ubicación:", error.message);
-        alert("No se pudo obtener tu ubicación.");
+
+        // Mostrar el <dialog> sin necesidad de mucho JS
+        const dialog = document.getElementById("mapDialog");
+        if (dialog) dialog.showModal();
       }
     );
   } else {
-    alert("Tu navegador no soporta la geolocalización.");
+    const dialog = document.getElementById("mapDialog");
+    if (dialog) dialog.showModal();
   }
 }

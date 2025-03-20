@@ -52,7 +52,7 @@ $(document).ready(function () {
       titulo: "SEO Optimizado",
       descripcion: "Posicionamiento en buscadores y aumento de tráfico.",
     },
-    // Agrega más proyectos aquí...
+    // Más proyectos si quieres...
   ];
 
   const container = $(".gallery-container");
@@ -136,7 +136,10 @@ $(document).ready(function () {
 
   function iniciarAutoScroll() {
     autoScroll = setInterval(() => {
-      const maxScrollLeft = container[0].scrollWidth - container[0].clientWidth;
+      const maxScrollLeft = container.length
+        ? container[0].scrollWidth - container[0].clientWidth
+        : 0;
+
       scrollAmount =
         scrollAmount >= maxScrollLeft ? 0 : scrollAmount + cardWidth;
       container.animate({ scrollLeft: scrollAmount }, 600);
@@ -163,77 +166,88 @@ $(document).ready(function () {
 /*******************************
  * SLIDER NOTICIAS API (GNews)
  *******************************/
-$(document).ready(function () {
-  const containerAPI = $("#news-container-api");
-  const cardWidth = 316;
-  let scrollAPI = 0;
-  let autoScrollAPI;
+// $(document).ready(function () {
+//   const containerAPI = $("#news-container-api");
+//   const cardWidth = 316;
+//   let scrollAPI = 0;
+//   let autoScrollAPI;
 
-  const apiKey = "1f9051fc25833d55d792fa46713c9825";
-  const apiUrl = `https://gnews.io/api/v4/top-headlines?lang=en&country=us&max=10&token=${apiKey}`;
+//   const apiKey = "1f9051fc25833d55d792fa46713c9825"; // ¡IMPORTANTE! Ponla en Google y restringe
+//   const apiUrl = `https://gnews.io/api/v4/top-headlines?lang=en&country=us&max=10&token=${apiKey}`;
 
-  function loadNewsAPI() {
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        const articles = data.articles || [];
+//   function loadNewsAPI() {
+//     fetch(apiUrl)
+//       .then((response) => response.json())
+//       .then((data) => {
+//         const articles = data.articles || [];
 
-        if (!articles.length) {
-          containerAPI.html("<p>No hay noticias disponibles</p>");
-          return;
-        }
+//         if (!articles.length) {
+//           containerAPI.html("<p>No hay noticias disponibles</p>");
+//           return;
+//         }
 
-        containerAPI.empty();
+//         containerAPI.empty();
 
-        articles.forEach((item) => {
-          const card = `
-            <a href="${item.url}" target="_blank" class="news-card-link">
-              <div class="news-card">
-                <h3>${item.title}</h3>
-                <p>${item.description || "Descripción no disponible"}</p>
-                <span>${new Date(item.publishedAt).toLocaleDateString()}</span>
-              </div>
-            </a>`;
-          containerAPI.append(card);
-        });
+//         articles.forEach((item) => {
+//           const card = `
+//             <a href="${item.url}" target="_blank" class="news-card-link">
+//               <div class="news-card">
+//                 <h3>${item.title}</h3>
+//                 <p>${item.description || "Descripción no disponible"}</p>
+//                 <span>${new Date(item.publishedAt).toLocaleDateString()}</span>
+//               </div>
+//             </a>`;
+//           containerAPI.append(card);
+//         });
 
-        iniciarAutoScrollAPI();
-      })
-      .catch((error) => console.error("Error cargando noticias API:", error));
-  }
+//         iniciarAutoScrollAPI();
+//       })
+//       .catch((error) => console.error("Error cargando noticias API:", error));
+//   }
 
-  function iniciarAutoScrollAPI() {
-    autoScrollAPI = setInterval(() => {
-      const maxScroll =
-        containerAPI[0].scrollWidth - containerAPI[0].clientWidth;
-      scrollAPI = scrollAPI >= maxScroll ? 0 : scrollAPI + cardWidth;
-      containerAPI.animate({ scrollLeft: scrollAPI }, 600);
-    }, 3000);
-  }
+//   function iniciarAutoScrollAPI() {
+//     autoScrollAPI = setInterval(() => {
+//       const maxScroll =
+//         containerAPI[0].scrollWidth - containerAPI[0].clientWidth;
+//       scrollAPI = scrollAPI >= maxScroll ? 0 : scrollAPI + cardWidth;
+//       containerAPI.animate({ scrollLeft: scrollAPI }, 600);
+//     }, 3000);
+//   }
 
-  $(".next-api").click(function () {
-    clearInterval(autoScrollAPI);
-    scrollAPI += cardWidth;
-    containerAPI.animate({ scrollLeft: scrollAPI }, 500);
-    iniciarAutoScrollAPI();
-  });
+//   $(".next-api").click(function () {
+//     clearInterval(autoScrollAPI);
+//     scrollAPI += cardWidth;
+//     containerAPI.animate({ scrollLeft: scrollAPI }, 500);
+//     iniciarAutoScrollAPI();
+//   });
 
-  $(".prev-api").click(function () {
-    clearInterval(autoScrollAPI);
-    scrollAPI = Math.max(scrollAPI - cardWidth, 0);
-    containerAPI.animate({ scrollLeft: scrollAPI }, 500);
-    iniciarAutoScrollAPI();
-  });
+//   $(".prev-api").click(function () {
+//     clearInterval(autoScrollAPI);
+//     scrollAPI = Math.max(scrollAPI - cardWidth, 0);
+//     containerAPI.animate({ scrollLeft: scrollAPI }, 500);
+//     iniciarAutoScrollAPI();
+//   });
 
-  loadNewsAPI();
-});
+//   loadNewsAPI();
+// });
 
 /*******************************
  * GOOGLE MAPS + DIRECTIONS
  *******************************/
 import initMap from "./googleMap.js";
 import { calcularRuta } from "./direction.js";
-import { initAutocomplete } from "./placesAutocomplete.js";
+import {
+  initAutocomplete,
+  origenPlace,
+  destinoPlace,
+} from "./placesAutocomplete.js";
+
+$(document).ready(function () {
+  console.log("DOM listo para Google Maps");
+
+  const startMap = () => {
+    initMap();
+    initAutocomplete();
 
 $(document).ready(function () {
   console.log("DOM listo para Google Maps");
@@ -243,15 +257,17 @@ $(document).ready(function () {
     initAutocomplete();
 
     $("#btnCalcularRuta").on("click", () => {
-      const origen = $("#origen").val();
-      const destino = $("#destino").val();
+      console.log("OrigenPlace:", origenPlace);
+      console.log("DestinoPlace:", destinoPlace);
 
-      if (!origen || !destino) {
-        alert("Por favor, completa el origen y el destino.");
+      if (!origenPlace || !destinoPlace) {
+        alert(
+          "Por favor, selecciona el origen y el destino desde las sugerencias."
+        );
         return;
       }
 
-      calcularRuta(origen, destino);
+      calcularRuta(origenPlace.location, destinoPlace.location);
     });
   };
 
@@ -266,15 +282,28 @@ $(document).ready(function () {
       }
     });
   }
+});
 
-  // Si quieres botones de ejemplo, descomenta:
-  /*
-  $("#btnMadridBarcelona").on("click", () => {
-    calcularRuta("Madrid, España", "Barcelona, España");
-  });
+  };
+  
 
-  $("#btnMadridValencia").on("click", () => {
-    calcularRuta("Madrid, España", "Valencia, España");
-  });
-  */
+  if (typeof google !== "undefined" && google.maps) {
+    startMap();
+  } else {
+    console.warn("Esperando a que Google Maps cargue...");
+    window.addEventListener("load", () => {
+      if (typeof google !== "undefined" && google.maps) {
+        startMap();
+      } else {
+        console.error("Google Maps API no se ha cargado.");
+      }
+    });
+  }
+});
+
+const cerrarDialogBtn = document.getElementById("cerrarDialog");
+
+cerrarDialogBtn.addEventListener("click", () => {
+  const dialog = document.getElementById("mapDialog");
+  if (dialog) dialog.close();
 });

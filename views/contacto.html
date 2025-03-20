@@ -74,23 +74,27 @@
             </div>
         </section>
         <!-- MAPA Y CÁLCULO DE RUTA -->
-    <section class="map-section">
-        <h2>¿Dónde Estamos?</h2>
-    
-        <div id="map"></div>
-        <button id="btnMiUbicacion">📍 Mi Ubicación</button>
-    
-        <!-- Inputs para calcular ruta -->
-        <div id="rutas" class="rutas-container">
-            <input type="text" id="origen" placeholder="Escribe tu ubicación" />
-            <input type="text" id="destino" placeholder="Destino (Ej. Madrid, España)" />
-            <button id="btnCalcularRuta" class="btn btn-primary">Calcular Ruta</button>
-        </div>
-    
-        <!-- Info de la ruta calculada -->
-        <div id="infoRuta">Aquí aparecerán la distancia y duración de tu ruta...</div>
-    </section>
+        <section class="map-section">
+            <h2>¿Dónde Estamos?</h2>
 
+            <div id="map"></div>
+            <button id="btnMiUbicacion">📍 Mi Ubicación</button>
+
+            <!-- Inputs para calcular ruta -->
+            <div id="rutas" class="rutas-container">
+                <input type="text" id="origen" placeholder="Escribe tu ubicación" />
+                <input type="text" id="destino" placeholder="Destino (Ej. Madrid, España)" />
+                <button id="btnCalcularRuta" class="btn btn-primary">Calcular Ruta</button>
+            </div>
+
+            <!-- Info de la ruta calculada -->
+            <div id="infoRuta">Aquí aparecerán la distancia y duración de tu ruta...</div>
+        </section>
+        <dialog id="mapDialog">
+            <h3>Aviso de Ubicación</h3>
+            <p>No se pudo obtener tu ubicación. Activa el GPS o revisa los permisos del navegador.</p>
+            <button id="cerrarDialog">Cerrar</button>
+        </dialog>
 
         <!-- MODAL DE MENSAJES FORMULARIO -->
         <div id="formModal" class="form-modal">
@@ -112,11 +116,14 @@
             <a href="#">LinkedIn</a>
         </div>
     </footer>
-    <script src="../JS/"></script>
+    <script src="../JS/jquery-3.7.1.min.js"></script>
     <script type="module" src="../JS/app.js"></script>
     <script src="../JS/form-validation.js"></script>
-    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1k88tnbC1lFofWCE3Dkt9G7Roc_Iq7X8&libraries=places"
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpZhlLymOyPTE-hhzDtp8n-xKjysuikZg&libraries=places,geometry,marker"
         defer></script>
+
+
 </body>
 
 </html>
