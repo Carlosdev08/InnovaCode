@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | InnovaCode</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+</head>
+
+<body class="contact-page">
+    <!-- HEADER EMPRESA -->
+    <header class="site-header">
+        <nav class="navbar">
+            <!-- LOGO -->
+            <div class="logo-container">
+                <a href="../index.html" class="logo" title="InnovaCode Home">
+                    <img src="../assets/images/logoEmpresa.jpeg" alt="Logo InnovaCode">
+                </a>
+            </div>
+
+            <!-- MENÚ NAVEGACIÓN -->
+            <ul class="nav-links" id="nav-links">
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="./galeria.html">Galería</a></li>
+                <li><a href="./presupuesto.html">Presupuestos</a></li>
+                <li><a href="./contacto.html" class="active">Contacto</a></li>
+            </ul>
+
+            <!-- ICONO HAMBURGUESA -->
+            <div class="menu-toggle" id="menu-toggle">☰</div>
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main-contact-page">
+        <!-- HERO CONTACT -->
+        <section class="hero-contact">
+            <div class="hero-content">
+                <h1>¡Contáctanos!</h1>
+                <p>Estamos aquí para ayudarte. Llena el formulario o escríbenos en redes sociales.</p>
+            </div>
+        </section>
+
+        <!-- FORMULARIO DE CONTACTO -->
+        <section class="contact-section">
+            <div class="container">
+                <h2>Formulario de Contacto</h2>
+                <form action="#" id="contact-form" class="contact-form" method="POST">
+                    <label for="name">Nombre:</label>
+                    <input type="text" name="name" id="name" placeholder="Escribe tu nombre" maxlength="15"
+                        pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ ]+" required>
+
+                    <label for="surname">Apellidos:</label>
+                    <input type="text" name="surname" id="surname" placeholder="Escribe tus Apellidos" maxlength="40"
+                        pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ ]+" required>
+
+                    <label for="phone">Teléfono:</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Tu teléfono" maxlength="9" pattern="[0-9]{9}"
+                        required>
+
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" name="email" id="email" placeholder="tucorreo@ejemplo.com" required>
+
+                    <label for="message">Mensaje:</label>
+                    <textarea id="message" name="message" rows="5" placeholder="Escribe tu mensaje aquí..."
+                        required></textarea>
+
+                    <div class="button-group">
+                        <button type="submit" class="btn btn-primary" id="submit-btn">Enviar</button>
+                        <button type="reset" class="btn btn-secondary cancelar">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <!-- MODAL DE MENSAJES FORMULARIO -->
+        <div id="formModal" class="form-modal">
+            <div class="form-modal-content">
+                <span class="form-close"></span>
+                <h3 id="formModalTitle"></h3>
+                <p id="formModalText"></p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>&copy; 2025 InnovaCode. Todos los derechos reservados.</p>
+        <div class="social-media">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">LinkedIn</a>
+        </div>
+    </footer>
+
+    <script src="../JS/form-validation.js"></script>
+</body>
+
+</html>

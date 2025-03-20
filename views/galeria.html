@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <title>Galería de Proyectos | InnovaCode</title>
+    <link rel="stylesheet" href="../CSS/style.css" >
+</head>
+
+<body class="bannerGalery">
+    <!-- HEADER -->
+    <header class="site-header">
+        <nav class="navbar">
+            <div class="logo-container">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/images/logoEmpresa.jpeg" alt="Logo InnovaCode"  width="1024" height="1024">
+                </a>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="./galeria.html" class="active">Galería</a></li>
+                <li><a href="./presupuesto.html">Presupuestos</a></li>
+                <li><a href="./contacto.html">Contacto</a></li>
+            </ul>
+
+            <div class="menu-toggle" id="menu-toggle">☰</div>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="gallery-hero">
+        <div class="hero-content">
+            <h1>Nuestra Galería de Proyectos</h1>
+            <p>Descubre algunos de los proyectos que hemos realizado para nuestros clientes.</p>
+        </div>
+    </section>
+
+    <!-- FILTROS -->
+    <section class="gallery-section">
+        <div class="gallery-filters">
+            <button class="filter-btn active" data-filter="todos">Todos</button>
+            <button class="filter-btn" data-filter="web">Web</button>
+            <button class="filter-btn" data-filter="apps">Apps</button>
+            <button class="filter-btn" data-filter="seo">SEO</button>
+        </div>
+
+        <!-- GALERÍA -->
+        <div class="gallery-container">
+            <div class="gallery-card" data-category="web">
+                <img src="../assets/images/item1.jpeg" alt="Proyecto Tienda Online" width="1024" height="1024" >
+                <h3>Tienda Online</h3>
+                <p>Desarrollo completo de e-commerce.</p>
+               
+            </div>
+
+            <div class="gallery-card" data-category="apps">
+                <img src="../assets/images/item2.jpeg" alt="Proyecto App Móvil" width="1024" height="1024">
+                <h3>App de Gestión</h3>
+                <p>App para administración de tareas y productividad.</p>
+               
+            </div>
+
+            <div class="gallery-card" data-category="seo">
+                <img src="../assets/images/posicionamientoSeo.webp" alt="Proyecto SEO Optimizado" width="1024" height="1024">
+                <h3>SEO Optimizado</h3>
+                <p>Posicionamiento en buscadores y aumento de tráfico.</p>
+               
+            </div>
+
+            <div class="gallery-card" data-category="web">
+                <img src="../assets/images/landingpage.jpeg" alt="Landing Page" width="1024" height="1024">
+                <h3>Landing Page</h3>
+                <p>Página para captación de clientes potenciales.</p>
+               
+            </div>
+            <!-- Web -->
+            <div class="gallery-card" data-category="web">
+                <img src="../assets/images/porfolioProfesional.jpeg" alt="Portfolio Web"  width="1024" height="1024">
+                <h3>Portfolio Profesional</h3>
+                <p>Sitio web para mostrar el trabajo de diseñadores y freelancers.</p>
+               
+            </div>
+            
+            <!-- Apps -->
+            <div class="gallery-card" data-category="apps">
+                <img src="../assets/images/app_salud.jpeg" alt="App Salud" width="1024" height="1024" >
+                <h3>App Salud</h3>
+                <p>Aplicación para seguimiento de hábitos saludables y citas médicas.</p>
+               
+            </div>
+            
+            <!-- SEO -->
+            <div class="gallery-card" data-category="seo">
+                <img src="../assets/images/seo_blog.jpeg" alt="Optimización Blog SEO"  width="1024" height="1024">
+                <h3>Optimización Blog SEO</h3>
+                <p>Mejora de posicionamiento orgánico para blogs de contenido técnico.</p>
+               
+            </div>
+            
+            <!-- Web -->
+            <div class="gallery-card" data-category="web">
+                <img src="../assets/images/ecommerce_fashion.webp" alt="Tienda Ropa"  width="1024" height="1024">
+                <h3>E-commerce de Ropa</h3>
+                <p>Tienda online especializada en moda y complementos.</p>
+               
+            </div>
+            
+            <!-- Apps -->
+            <div class="gallery-card" data-category="apps">
+                <img src="../assets/images/app_reservas.webp" alt="App de Reservas"  width="1024" height="1024">
+                <h3>App de Reservas</h3>
+                <p>App para gestionar reservas en restaurantes y hoteles.</p>
+               
+            </div>
+            
+            <!-- SEO -->
+            <div class="gallery-card" data-category="seo">
+                <img src="../assets/images/seo_analytics.webp" alt="Análisis SEO" >
+                <h3>Análisis SEO Avanzado</h3>
+                <p>Herramienta de auditoría SEO y análisis de palabras clave.</p>
+               
+            </div>
+
+        </div>
+    </section>
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>&copy; 2024 InnovaCode. Todos los derechos reservados.</p>
+        <div class="social-media">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">LinkedIn</a>
+        </div>
+    </footer>
+
+    <!-- JS -->
+     <script src="../JS/jquery-3.7.1.min.js"></script>
+    <script src="../JS/app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,153 @@
+[
+  {
+    "titulo": "Nuevo Proyecto Lanzado",
+    "descripcion": "Hemos completado una tienda online para un cliente del sector moda.",
+    "fecha": "2024-03-01"
+  },
+  {
+    "titulo": "Ampliamos el Equipo",
+    "descripcion": "Nuestro equipo de desarrollo crece con dos nuevos programadores expertos en React.",
+    "fecha": "2024-02-20"
+  },
+  {
+    "titulo": "InnovaCode en la Feria Tech",
+    "descripcion": "Presentamos nuestras soluciones en la feria tecnológica de este año.",
+    "fecha": "2024-01-15"
+  },
+  {
+    "titulo": "Certificación ISO Obtenida",
+    "descripcion": "Hemos conseguido la certificación ISO 9001, reforzando nuestro compromiso con la calidad.",
+    "fecha": "2024-02-10"
+  },
+  {
+    "titulo": "Colaboración Internacional",
+    "descripcion": "Iniciamos una colaboración con una startup tecnológica en Silicon Valley.",
+    "fecha": "2024-01-30"
+  },
+  {
+    "titulo": "Nueva Oficina en Madrid",
+    "descripcion": "Abrimos una nueva sede en Madrid para estar más cerca de nuestros clientes.",
+    "fecha": "2024-01-10"
+  },
+  {
+    "titulo": "Webinar de Innovación",
+    "descripcion": "Ofrecimos un webinar sobre las últimas tendencias en inteligencia artificial.",
+    "fecha": "2024-03-15"
+  },
+  {
+    "titulo": "Expansión de Servicios",
+    "descripcion": "Ahora ofrecemos soporte técnico 24/7 para nuestros clientes.",
+    "fecha": "2024-03-25"
+  },
+  {
+    "titulo": "Donación a la Comunidad",
+    "descripcion": "Contribuimos con equipos tecnológicos a una escuela local.",
+    "fecha": "2024-02-05"
+  },
+  {
+    "titulo": "Evento de Networking",
+    "descripcion": "Participamos en un evento para conectar con startups emergentes.",
+    "fecha": "2024-04-10"
+  },
+  {
+    "titulo": "Reconocimiento como Mejor Startup",
+    "descripcion": "Fuimos premiados como la mejor startup tecnológica del año.",
+    "fecha": "2024-03-05"
+  },
+  {
+    "titulo": "Capacitación Interna",
+    "descripcion": "Organizamos talleres internos sobre metodologías ágiles.",
+    "fecha": "2024-03-20"
+  },
+  {
+    "titulo": "Lanzamiento de Blog Corporativo",
+    "descripcion": "Estrenamos un blog con contenido especializado en tecnología.",
+    "fecha": "2024-01-25"
+  },
+  {
+    "titulo": "Seminario de Ciberseguridad",
+    "descripcion": "Colaboramos en un seminario para concienciar sobre seguridad online.",
+    "fecha": "2024-02-28"
+  },
+  {
+    "titulo": "Actualización de Plataforma",
+    "descripcion": "Implementamos mejoras significativas en nuestra plataforma de gestión.",
+    "fecha": "2024-04-01"
+  },
+  {
+    "titulo": "Asociación con ONG",
+    "descripcion": "Establecimos una alianza para desarrollar soluciones tecnológicas para ONGs.",
+    "fecha": "2024-03-10"
+  },
+  {
+    "titulo": "Nuevo Producto en el Mercado",
+    "descripcion": "Lanzamos una herramienta SaaS para pequeñas empresas.",
+    "fecha": "2024-02-15"
+  },
+  {
+    "titulo": "Iniciativa Ecológica",
+    "descripcion": "Reducimos nuestra huella de carbono mediante procesos más sostenibles.",
+    "fecha": "2024-03-30"
+  },
+  {
+    "titulo": "Convenio con Universidades",
+    "descripcion": "Creamos convenios con universidades para prácticas de estudiantes.",
+    "fecha": "2024-04-05"
+  },
+  {
+    "titulo": "Rediseño de la Identidad Visual",
+    "descripcion": "Renovamos nuestro logo y branding.",
+    "fecha": "2024-02-08"
+  },
+  {
+    "titulo": "Desarrollo de Aplicación Móvil",
+    "descripcion": "Lanzamos nuestra primera app para dispositivos iOS y Android.",
+    "fecha": "2024-02-22"
+  },
+  {
+    "titulo": "Patrocinio de Evento Deportivo",
+    "descripcion": "Apoyamos un maratón local con nuestro patrocinio.",
+    "fecha": "2024-01-18"
+  },
+  {
+    "titulo": "Plataforma Multilingüe",
+    "descripcion": "Ahora nuestra plataforma soporta 10 idiomas adicionales.",
+    "fecha": "2024-03-12"
+  },
+  {
+    "titulo": "Creación de Podcast",
+    "descripcion": "Lanzamos un podcast sobre temas tecnológicos y empresariales.",
+    "fecha": "2024-01-05"
+  },
+  {
+    "titulo": "Premio de Innovación",
+    "descripcion": "Ganamos el premio regional por nuestras soluciones innovadoras.",
+    "fecha": "2024-04-07"
+  },
+  {
+    "titulo": "Migración al Cloud",
+    "descripcion": "Migramos toda nuestra infraestructura al cloud para mayor escalabilidad.",
+    "fecha": "2024-02-12"
+  },
+  {
+    "titulo": "Hackathon Interactivo",
+    "descripcion": "Organizamos nuestro primer hackathon interno.",
+    "fecha": "2024-01-20"
+  },
+  {
+    "titulo": "Asesorías Gratuitas",
+    "descripcion": "Ofrecemos asesorías tecnológicas gratuitas para pymes durante un mes.",
+    "fecha": "2024-03-08"
+  },
+  {
+    "titulo": "Actualización de Seguridad",
+    "descripcion": "Lanzamos un parche crítico para mejorar la seguridad de nuestros sistemas.",
+    "fecha": "2024-03-22"
+  },
+  {
+    "titulo": "Seminario Educativo",
+    "descripcion": "Ofrecimos un seminario gratuito sobre habilidades digitales.",
+    "fecha": "2024-01-14"
+  }
+]
+

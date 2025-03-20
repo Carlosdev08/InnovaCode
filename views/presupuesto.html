@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Presupuesto | InnovaCode</title>
+    <link rel="stylesheet" href="../CSS/style.css" />
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <nav class="navbar">
+            <!-- Logo -->
+            <div class="logo-container">
+                <a href="../index.html" class="logo" title="InnovaCode Home">
+                    <img src="../assets/images/logoEmpresa.jpeg" alt="Logo InnovaCode" />
+                </a>
+            </div>
+
+            <!-- Menú navegación -->
+            <ul class="nav-links" id="nav-links">
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="./galeria.html">Galería</a></li>
+                <li><a href="./presupuesto.html" class="active">Presupuestos</a></li>
+                <li><a href="./contacto.html">Contacto</a></li>
+            </ul>
+
+            <!-- Icono hamburguesa -->
+            <div class="menu-toggle" id="menu-toggle">☰</div>
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main-container banner-container" id="banner-container">
+        <section class="budget-section">
+            <h2>Formulario de Presupuesto</h2>
+
+            <form action="#" id="budget-form" class="budget-form" method="POST" enctype="multipart/form-data">
+
+                <!-- Nombre -->
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name" placeholder="Escribe tu nombre" maxlength="15"
+                    pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ ]+" required>
+
+                <!-- Apellidos -->
+                <label for="surname">Apellidos:</label>
+                <input type="text" id="surname" name="surname" placeholder="Escribe tus apellidos" maxlength="40"
+                    pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ ]+" required>
+
+                <!-- Teléfono -->
+                <label for="phone">Teléfono:</label>
+                <input type="tel" id="phone" name="phone" placeholder="Tu teléfono" maxlength="9" pattern="[0-9]{9}"
+                    required>
+
+                <!-- Email -->
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" required>
+
+                <!-- Servicio -->
+                <label for="service">Selecciona el servicio:</label>
+                <select id="service" name="service" required>
+                    <option value="">-- Selecciona --</option>
+                    <option value="web">Desarrollo Web</option>
+                    <option value="app">Aplicaciones Móviles</option>
+                    <option value="consulting">Consultoría Tecnológica</option>
+                </select>
+
+                <!-- Descripción -->
+                <label for="description">Descripción del Proyecto:</label>
+                <textarea id="description" name="description" rows="5" placeholder="Cuéntanos los detalles..."
+                    required></textarea>
+
+                <!-- Fecha estimada de inicio -->
+                <label for="start-date">Fecha estimada de inicio:</label>
+                <input type="date" id="start-date" name="start-date" required>
+
+                <!-- Presupuesto estimado -->
+                <label for="budget">Presupuesto estimado (€):</label>
+                <input type="number" id="budget" name="budget" min="100" step="50" placeholder="Ejemplo: 500" required>
+
+                <!-- Tipo de cliente -->
+                <label for="client-type">Tipo de cliente:</label>
+                <select id="client-type" name="client-type" required>
+                    <option value="">-- Selecciona --</option>
+                    <option value="empresa">Empresa</option>
+                    <option value="particular">Particular</option>
+                </select>
+
+                <!-- Urgencia -->
+                <label for="urgency">Urgencia:</label>
+                <select id="urgency" name="urgency" required>
+                    <option value="">-- Selecciona --</option>
+                    <option value="baja">Baja</option>
+                    <option value="media">Media</option>
+                    <option value="alta">Alta</option>
+                </select>
+
+                <!-- Adjuntar archivo -->
+                <label for="file">Adjuntar archivo (opcional):</label>
+                <input type="file" id="file" name="file" accept=".pdf,.jpg,.jpeg,.png">
+
+                <!-- Checkbox términos -->
+                <div class="terms-container">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">Acepto los <a href="../views/terminos.html" target="_blank">términos y
+                            condiciones</a> y
+                        la <a href="../views/privacidad.html" target="_blank">política de privacidad</a>.</label>
+                </div>
+
+                <!-- Botones -->
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary" id="submit-btn">Enviar</button>
+                    <button type="reset" class="btn btn-secondary cancelar">Cancelar</button>
+                </div>
+
+            </form>
+        </section>
+
+        <!-- MODAL DE MENSAJES FORMULARIO -->
+        <div id="formModal" class="form-modal">
+            <div class="form-modal-content">
+                <span class="form-close"></span>
+                <h3 id="formModalTitle"></h3>
+                <p id="formModalText"></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 InnovaCode. Todos los derechos reservados.</p>
+        <div class="social-media">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">LinkedIn</a>
+        </div>
+    </footer>
+
+    <script src="../JS/form-validation.js"></script>
+</body>
+
+</html>

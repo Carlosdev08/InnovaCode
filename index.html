@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InnovaCode | Desarrollo y Tecnología</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body>
+
+    <!-- HEADER / NAVBAR -->
+    <header class="site-header">
+        <nav class="navbar">
+            <!-- Logo -->
+            <div class="logo-container">
+                <a href="./index.html" class="logo" title="InnovaCode Home">
+                    <img src="./assets/images/logoEmpresa.jpeg" alt="Logo InnovaCode">
+                </a>
+            </div>
+
+            <!-- Menú navegación -->
+            <ul class="nav-links" id="nav-links">
+                <li><a href="./index.html" class="active">Inicio</a></li>
+                <li><a href="./views/galeria.html">Galería</a></li>
+                <li><a href="./views/presupuesto.html">Presupuestos</a></li>
+                <li><a href="./views/contacto.html">Contacto</a></li>
+            </ul>
+
+            <!-- Icono hamburguesa -->
+            <div class="menu-toggle" id="menu-toggle">☰</div>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-container">
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Bienvenidos a InnovaCode</h1>
+                <p>Desarrollo de software a medida para el futuro</p>
+                <a href="./views/presupuesto.html" class="btn btn-primary">Solicita tu Presupuesto</a>
+
+            </div>
+        </section>
+
+        <!-- Servicios Section -->
+        <section class="services-section">
+            <h2>Nuestros Servicios</h2>
+            <div class="services-container">
+
+                <div class="service-card">
+                    <img src="./assets/images/diseñoWeb.webp" alt="Desarrollo Web Icono" class="service-icon"
+                        width="600" height="600">
+                    <h3>Desarrollo Web</h3>
+                    <p>Webs modernas, rápidas y responsivas adaptadas a cualquier dispositivo.</p>
+                </div>
+
+                <div class="service-card">
+                    <img src="./assets/images/aplicaciones.webp" alt="Desarrollo Web Icono" class="service-icon"
+                        width="600" height="600">
+                    <h3>Aplicaciones Móviles</h3>
+                    <p>Creamos apps móviles intuitivas para Android y iOS.</p>
+                </div>
+
+                <div class="service-card">
+                    <img src="./assets/images/consulting.webp" alt="Desarrollo Web Icono" class="service-icon"
+                        width="600" height="600">
+                    <h3>Consultoría Tecnológica</h3>
+                    <p>Asesoramiento profesional para optimizar tus procesos y tecnología.</p>
+                </div>
+
+                <div class="service-card">
+                    <img src="./assets/images/ecommerce.webp" alt="Desarrollo Web Icono" class="service-icon"
+                        width="600" height="600">
+                    <h3>E-commerce</h3>
+                    <p>Tiendas online eficientes y fáciles de gestionar para vender tus productos.</p>
+                </div>
+
+                <div class="service-card">
+                    <img src="./assets/images/seoMarketing.png" alt="Desarrollo Web Icono" class="service-icon"
+                        width="600" height="600">
+                    <h3>SEO | Posicionamiento</h3>
+                    <p>Mejoramos tu visibilidad en los motores de búsqueda para atraer más clientes.</p>
+                </div>
+
+
+            </div>
+        </section>
+
+
+        <!-- Galería Section -->
+        <!-- Galería Section (index.html solo 4 proyectos) -->
+        <section class="projects-gallery-home">
+            <h2>Nuestros Proyectos</h2>
+            <div class="projects-home-container">
+                <div class="project-card">
+                    <img src="./assets/images/item1.jpeg" alt="Proyecto Tienda Virtual" width="600" height="600">
+                    <h3>Tienda Virtual</h3>
+                    <p>Desarrollo de ecommerce adaptable a dispositivos móviles.</p>
+                </div>
+
+                <div class="project-card">
+                    <img src="./assets/images/item2.jpeg" alt="Proyecto Landing Page" width="600" height="600">
+                    <h3>Landing Page</h3>
+                    <p>Diseño limpio y moderno para captar clientes potenciales.</p>
+                </div>
+
+                <div class="project-card">
+                    <img src="./assets/images/posicionamientoSeo.webp" alt="Gestor de Proyectos" width="600"
+                        height="600">
+                    <h3>Gestor de Proyectos</h3>
+                    <p>Plataforma de gestión de tareas en tiempo real.</p>
+                </div>
+
+                <div class="project-card">
+                    <img src="./assets/images/mantenimientoWeb.jpeg" alt="Mantenimiento Web" width="600" height="600">
+                    <h3>Mantenimiento Web</h3>
+                    <p>Actualización, soporte y seguridad continua para tu página web.</p>
+                </div>
+            </div>
+
+            <a href="./views/galeria.html" class="btn btn-primary">Ver más proyectos</a>
+        </section>
+
+
+        <!-- CTA Contacto -->
+        <section class="cta-contact">
+            <h2>¿Quieres saber más?</h2>
+            <p>Contacta con nosotros y te asesoramos sin compromiso.</p>
+            <a href="./views/contacto.html" class="btn btn-primary">Contactar Ahora</a>
+        </section>
+        <!-- NOTICIAS SECTION -->
+        <section class="news-section">
+            <h2>Últimas Noticias</h2>
+
+            <div class="news-carousel-wrapper">
+                <button class="carousel-btn prev">‹ </button>
+                
+
+                <div id="news-container" class="news-container">
+                    <!-- Aquí se cargan las noticias dinámicamente -->
+                </div>
+
+                <button class="carousel-btn next">›</button>
+            </div>
+        </section>
+
+        <!-- Section de noticia con la api -->
+        <section class="news-section api-new">
+                <h2>Últimas Noticias desde API</h2>
+                <div id="news-carousel-wrapper">
+                    <button class="carousel-btn prev prev-ap">‹ </button>
+                    <div id="news-container-api" class="news-container">
+
+                    </div>
+                    <button class="carousel-btn next next-api">›</button>
+                </div>
+        </section>
+
+
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>&copy; 2024 InnovaCode. Todos los derechos reservados.</p>
+        <div class="social-media">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">LinkedIn</a>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="./JS/jquery-3.7.1.min.js"></script>
+    <script src="./JS/app.js"></script>
+</body>
+
+</html>
