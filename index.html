@@ -137,27 +137,25 @@
             <h2>Últimas Noticias</h2>
 
             <div class="news-carousel-wrapper">
-                <button class="carousel-btn prev">‹ </button>
-                
+
 
                 <div id="news-container" class="news-container">
                     <!-- Aquí se cargan las noticias dinámicamente -->
                 </div>
 
-                <button class="carousel-btn next">›</button>
             </div>
         </section>
 
         <!-- Section de noticia con la api -->
-        <section class="news-section api-new">
-                <h2>Últimas Noticias desde API</h2>
-                <div id="news-carousel-wrapper">
-                    <button class="carousel-btn prev prev-ap">‹ </button>
-                    <div id="news-container-api" class="news-container">
+        <section class="news-section-api api-new">
+            <h2>Últimas Noticias desde API</h2>
+            <div id="news-api-carousel-wrapper">
 
-                    </div>
-                    <button class="carousel-btn next next-api">›</button>
+                <div id="news-container-api" class="news-api-container">
+
                 </div>
+
+            </div>
         </section>
 
 
@@ -176,7 +174,7 @@
 
     <!-- JS -->
     <script src="./JS/jquery-3.7.1.min.js"></script>
-    <script src="./JS/app.js"></script>
+    <script type="module" src="./JS/app.js"></script>
 </body>
 
 </html>

@@ -7,26 +7,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const navLinks = document.querySelectorAll(".nav-links a");
   const menuToggle = document.getElementById("menu-toggle");
 
-  // Efecto al hacer scroll
   function scrollNavbar() {
-    if (window.scrollY > 100) {
-      navbar.classList.add("nav-scroll");
-    } else {
-      navbar.classList.remove("nav-scroll");
-    }
+    window.scrollY > 100
+      ? navbar.classList.add("nav-scroll")
+      : navbar.classList.remove("nav-scroll");
   }
 
-  // Menú hamburguesa (móvil)
   menuToggle.addEventListener("click", () => {
     navLinksContainer.classList.toggle("active");
   });
 
-  // Activar enlaces del menú
   navLinks.forEach((link) => {
     link.addEventListener("click", function () {
-      navLinks.forEach((link) => link.classList.remove("active"));
+      navLinks.forEach((l) => l.classList.remove("active"));
       this.classList.add("active");
-      navLinksContainer.classList.remove("active"); // Cierra menú
+      navLinksContainer.classList.remove("active");
     });
   });
 
@@ -57,51 +52,7 @@ $(document).ready(function () {
       titulo: "SEO Optimizado",
       descripcion: "Posicionamiento en buscadores y aumento de tráfico.",
     },
-    {
-      categoria: "web",
-      imagen: "../assets/images/landingpage.jpeg",
-      titulo: "Landing Page",
-      descripcion: "Página para captación de clientes potenciales.",
-    },
-    {
-      categoria: "web",
-      imagen: "../assets/images/porfolioProfesional.jpeg",
-      titulo: "Portfolio Profesional",
-      descripcion:
-        "Sitio web para mostrar el trabajo de diseñadores y freelancers.",
-    },
-    {
-      categoria: "apps",
-      imagen: "../assets/images/app_salud.jpeg",
-      titulo: "App Salud",
-      descripcion:
-        "Aplicación para seguimiento de hábitos saludables y citas médicas.",
-    },
-    {
-      categoria: "seo",
-      imagen: "../assets/images/seo_blog.jpeg",
-      titulo: "Optimización Blog SEO",
-      descripcion:
-        "Mejora de posicionamiento orgánico para blogs de contenido técnico.",
-    },
-    {
-      categoria: "web",
-      imagen: "../assets/images/ecommerce_fashion.webp",
-      titulo: "E-commerce de Ropa",
-      descripcion: "Tienda online especializada en moda y complementos.",
-    },
-    {
-      categoria: "apps",
-      imagen: "../assets/images/app_reservas.webp",
-      titulo: "App de Reservas",
-      descripcion: "App para gestionar reservas en restaurantes y hoteles.",
-    },
-    {
-      categoria: "seo",
-      imagen: "../assets/images/seo_analytics.webp",
-      titulo: "Análisis SEO Avanzado",
-      descripcion: "Herramienta de auditoría SEO y análisis de palabras clave.",
-    },
+    // Agrega más proyectos aquí...
   ];
 
   const container = $(".gallery-container");
@@ -110,22 +61,18 @@ $(document).ready(function () {
   const modalTitle = $("#modalTitle");
   const modalDesc = $("#modalDesc");
 
-  // Pintar las cards
   proyectos.forEach((proyecto) => {
     const card = `
       <div class="gallery-card" data-category="${proyecto.categoria}">
         <img src="${proyecto.imagen}" alt="${proyecto.titulo}" width="1024" height="1024">
         <h3>${proyecto.titulo}</h3>
-        <p>${proyecto.descripcion}</p>        
-      </div>
-    `;
+        <p>${proyecto.descripcion}</p>
+      </div>`;
     container.append(card);
   });
 
-  // Filtros
   $(".filter-btn").click(function () {
     const categoria = $(this).data("filter");
-
     $(".filter-btn").removeClass("active");
     $(this).addClass("active");
 
@@ -134,16 +81,11 @@ $(document).ready(function () {
     } else {
       $(".gallery-card").each(function () {
         const cardCategoria = $(this).data("category");
-        if (cardCategoria === categoria) {
-          $(this).fadeIn();
-        } else {
-          $(this).fadeOut();
-        }
+        cardCategoria === categoria ? $(this).fadeIn() : $(this).fadeOut();
       });
     }
   });
 
-  // Modal click en card
   container.on("click", ".gallery-card", function () {
     const imgSrc = $(this).find("img").attr("src");
     const title = $(this).find("h3").text();
@@ -157,14 +99,8 @@ $(document).ready(function () {
     $("body").css("overflow", "hidden");
   });
 
-  // Cerrar modal
-  $(".close").click(() => {
-    modal.fadeOut();
-    $("body").css("overflow", "auto");
-  });
-
-  modal.click((e) => {
-    if ($(e.target).is("#projectModal")) {
+  $(".close, #projectModal").click(function (e) {
+    if ($(e.target).is("#projectModal") || $(e.target).hasClass("close")) {
       modal.fadeOut();
       $("body").css("overflow", "auto");
     }
@@ -176,7 +112,7 @@ $(document).ready(function () {
  *******************************/
 $(document).ready(function () {
   const container = $("#news-container");
-  const cardWidth = 300 + 16;
+  const cardWidth = 316; // 300px + 16px gap
   let scrollAmount = 0;
   let autoScroll;
 
@@ -188,8 +124,7 @@ $(document).ready(function () {
             <h3>${noticia.titulo}</h3>
             <p>${noticia.descripcion}</p>
             <span>${noticia.fecha}</span>
-          </div>
-        `;
+          </div>`;
         container.append(card);
       });
       iniciarAutoScroll();
@@ -202,13 +137,8 @@ $(document).ready(function () {
   function iniciarAutoScroll() {
     autoScroll = setInterval(() => {
       const maxScrollLeft = container[0].scrollWidth - container[0].clientWidth;
-
-      if (scrollAmount >= maxScrollLeft) {
-        scrollAmount = 0;
-      } else {
-        scrollAmount += cardWidth;
-      }
-
+      scrollAmount =
+        scrollAmount >= maxScrollLeft ? 0 : scrollAmount + cardWidth;
       container.animate({ scrollLeft: scrollAmount }, 600);
     }, 3000);
   }
@@ -222,8 +152,7 @@ $(document).ready(function () {
 
   $(".carousel-btn.prev").click(function () {
     clearInterval(autoScroll);
-    scrollAmount -= cardWidth;
-    if (scrollAmount < 0) scrollAmount = 0;
+    scrollAmount = Math.max(scrollAmount - cardWidth, 0);
     container.animate({ scrollLeft: scrollAmount }, 500);
     iniciarAutoScroll();
   });
@@ -236,64 +165,48 @@ $(document).ready(function () {
  *******************************/
 $(document).ready(function () {
   const containerAPI = $("#news-container-api");
-  const cardWidth = 300 + 16; 
+  const cardWidth = 316;
   let scrollAPI = 0;
   let autoScrollAPI;
 
   const apiKey = "1f9051fc25833d55d792fa46713c9825";
-  const apiUrl = `https://gnews.io/api/v4/top-headlines?lang=en&country=en&max=10&token=${apiKey}`;
+  const apiUrl = `https://gnews.io/api/v4/top-headlines?lang=en&country=us&max=10&token=${apiKey}`;
 
-  function loadNews() {
+  function loadNewsAPI() {
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        if (!data.articles || data.articles.length === 0) {
-          console.warn("No hay noticias en español, buscando en inglés...");
-          return fetch(
-            `https://gnews.io/api/v4/top-headlines?lang=en&max=10&token=${apiKey}`
-          ).then((response) => response.json());
-        }
-        return data;
-      })
-      .then((data) => {
         const articles = data.articles || [];
-        const container = document.getElementById("news-container-api");
 
-        if (articles.length === 0) {
-          container.innerHTML = "<p>No hay noticias disponibles</p>";
+        if (!articles.length) {
+          containerAPI.html("<p>No hay noticias disponibles</p>");
           return;
         }
 
-        // Limpio el contenido anterior, por si acaso
-        container.innerHTML = "";
+        containerAPI.empty();
 
         articles.forEach((item) => {
           const card = `
-        <a href="${item.url}" target="_blank" class="news-card-link">
-          <div class="news-card">
-            <h3>${item.title}</h3>
-            <p>${item.description || "Descripción no disponible"}</p>
-            <span>${new Date(item.publishedAt).toLocaleDateString()}</span>
-          </div>
-        </a>
-      `;
-          container.innerHTML += card;
+            <a href="${item.url}" target="_blank" class="news-card-link">
+              <div class="news-card">
+                <h3>${item.title}</h3>
+                <p>${item.description || "Descripción no disponible"}</p>
+                <span>${new Date(item.publishedAt).toLocaleDateString()}</span>
+              </div>
+            </a>`;
+          containerAPI.append(card);
         });
+
+        iniciarAutoScrollAPI();
       })
-      .catch((error) => console.error("Error cargando noticias:", error));
+      .catch((error) => console.error("Error cargando noticias API:", error));
   }
 
   function iniciarAutoScrollAPI() {
     autoScrollAPI = setInterval(() => {
       const maxScroll =
         containerAPI[0].scrollWidth - containerAPI[0].clientWidth;
-
-      if (scrollAPI >= maxScroll) {
-        scrollAPI = 0;
-      } else {
-        scrollAPI += cardWidth;
-      }
-
+      scrollAPI = scrollAPI >= maxScroll ? 0 : scrollAPI + cardWidth;
       containerAPI.animate({ scrollLeft: scrollAPI }, 600);
     }, 3000);
   }
@@ -307,12 +220,61 @@ $(document).ready(function () {
 
   $(".prev-api").click(function () {
     clearInterval(autoScrollAPI);
-    scrollAPI -= cardWidth;
-    if (scrollAPI < 0) scrollAPI = 0;
+    scrollAPI = Math.max(scrollAPI - cardWidth, 0);
     containerAPI.animate({ scrollLeft: scrollAPI }, 500);
     iniciarAutoScrollAPI();
   });
 
-  loadNews(); 
+  loadNewsAPI();
 });
 
+/*******************************
+ * GOOGLE MAPS + DIRECTIONS
+ *******************************/
+import initMap from "./googleMap.js";
+import { calcularRuta } from "./direction.js";
+import { initAutocomplete } from "./placesAutocomplete.js";
+
+$(document).ready(function () {
+  console.log("DOM listo para Google Maps");
+
+  const startMap = () => {
+    initMap();
+    initAutocomplete();
+
+    $("#btnCalcularRuta").on("click", () => {
+      const origen = $("#origen").val();
+      const destino = $("#destino").val();
+
+      if (!origen || !destino) {
+        alert("Por favor, completa el origen y el destino.");
+        return;
+      }
+
+      calcularRuta(origen, destino);
+    });
+  };
+
+  if (typeof google !== "undefined" && google.maps) {
+    startMap();
+  } else {
+    window.addEventListener("load", () => {
+      if (typeof google !== "undefined" && google.maps) {
+        startMap();
+      } else {
+        console.error("Google Maps API no se ha cargado.");
+      }
+    });
+  }
+
+  // Si quieres botones de ejemplo, descomenta:
+  /*
+  $("#btnMadridBarcelona").on("click", () => {
+    calcularRuta("Madrid, España", "Barcelona, España");
+  });
+
+  $("#btnMadridValencia").on("click", () => {
+    calcularRuta("Madrid, España", "Valencia, España");
+  });
+  */
+});
