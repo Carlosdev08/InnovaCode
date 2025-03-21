@@ -2,74 +2,62 @@
  * NAVBAR Y MENÚ SCROLL EFFECT
  *******************************/
 document.addEventListener("DOMContentLoaded", () => {
-
-  
   const navbar = document.querySelector(".navbar");
   const navLinksContainer = document.getElementById("nav-links");
-  const navLinks = document.querySelectorAll(".nav-links a");
   const menuToggle = document.getElementById("menu-toggle");
-document.addEventListener("DOMContentLoaded", () => {
-  const menuToggle = document.getElementById("menu-toggle");
-  const navLinksContainer = document.getElementById("nav-links");
 
   if (!menuToggle || !navLinksContainer) {
     console.warn("❌ No se encontró el menú o los enlaces.");
-    return;
+  } else {
+    menuToggle.addEventListener("click", () => {
+      navLinksContainer.classList.toggle("active");
+    });
+
+    const navLinks = navLinksContainer.querySelectorAll("a");
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinksContainer.classList.remove("active");
+        navLinks.forEach((l) => l.classList.remove("active"));
+        link.classList.add("active");
+      });
+    });
   }
 
-  menuToggle.addEventListener("click", () => {
-    navLinksContainer.classList.toggle("active");
-  });
-
-  const navLinks = navLinksContainer.querySelectorAll("a");
-
-  navLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      navLinksContainer.classList.remove("active");
-    });
-  });
-});
-
-
   const scrollNavbar = () => {
-    window.scrollY > 100
-      ? navbar.classList.add("nav-scroll")
-      : navbar.classList.remove("nav-scroll");
+    if (window.scrollY > 100) {
+      navbar.classList.add("nav-scroll");
+    } else {
+      navbar.classList.remove("nav-scroll");
+    }
   };
 
-  menuToggle.addEventListener("click", () => {
-    navLinksContainer.classList.toggle("active");
-  });
-
-  navLinks.forEach((link) => {
-    link.addEventListener("click", function () {
-      navLinks.forEach((l) => l.classList.remove("active"));
-      this.classList.add("active");
-      navLinksContainer.classList.remove("active");
-    });
-  });
-
   window.addEventListener("scroll", scrollNavbar);
-  scrollNavbar();
-});
+  scrollNavbar(); // iniciar en el load
 
-document.addEventListener("DOMContentLoaded", () => {
+  /*******************************
+   * PÁGINAS SEGÚN BODY CLASS
+   *******************************/
   const body = document.body;
 
   if (body.classList.contains("home-page")) {
-    initHomePage();
+    // initHomePage(); // Aquí iría tu función si existe
+    console.log("🏠 Home Page");
   }
 
   if (body.classList.contains("galeria-page")) {
-    initGaleriaPage();
+    // initGaleriaPage(); // Comenta o implementa
+    console.log("🖼️ Galería Page");
   }
 
   if (body.classList.contains("contacto-page")) {
-    initContactoPage();
+    // initContactoPage();
+    console.log("📍 Contacto Page");
   }
 
   if (body.classList.contains("presupuesto-page")) {
-    initPresupuestoPage();
+    // initPresupuestoPage();
+    console.log("💼 Presupuesto Page");
   }
 });
 
@@ -77,7 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
  * GALERÍA, FILTROS Y MODAL
  *******************************/
 $(document).ready(function () {
-  if ($(".gallery-container").length > 0) {
+  const $gallery = $(".gallery-container");
+
+  if ($gallery.length > 0) {
     console.log("🎨 Galería detectada");
 
     $(".filter-btn").click(function () {
@@ -104,7 +94,13 @@ $(document).ready(function () {
  * SLIDER NOTICIAS LOCALES
  *******************************/
 $(document).ready(function () {
-  const container = $("#news-container");
+  const $container = $("#news-container");
+
+  if ($container.length === 0) {
+    console.warn("❌ news-container no encontrado.");
+    return;
+  }
+
   const cardWidth = 316;
   let scrollAmount = 0;
   let autoScroll;
@@ -112,7 +108,7 @@ $(document).ready(function () {
   const cargarNoticias = () => {
     $.getJSON("../data/news.json", function (data) {
       data.forEach((noticia) => {
-        container.append(`
+        $container.append(`
           <div class="news-card">
             <h3>${noticia.titulo}</h3>
             <p>${noticia.descripcion}</p>
@@ -121,31 +117,36 @@ $(document).ready(function () {
       });
       iniciarAutoScroll();
     }).fail(() => {
-      console.error("No se pudieron cargar las noticias.");
-      container.html("<p>Error al cargar las noticias.</p>");
+      console.error("❌ No se pudieron cargar las noticias locales.");
+      $container.html("<p>Error al cargar las noticias.</p>");
     });
   };
 
   const iniciarAutoScroll = () => {
+    clearInterval(autoScroll);
+
     autoScroll = setInterval(() => {
-      const maxScrollLeft = container[0].scrollWidth - container[0].clientWidth;
+      const maxScrollLeft =
+        $container[0].scrollWidth - $container[0].clientWidth;
+
       scrollAmount =
         scrollAmount >= maxScrollLeft ? 0 : scrollAmount + cardWidth;
-      container.animate({ scrollLeft: scrollAmount }, 600);
+
+      $container.animate({ scrollLeft: scrollAmount }, 600);
     }, 3000);
   };
 
   $(".carousel-btn.next").click(function () {
     clearInterval(autoScroll);
     scrollAmount += cardWidth;
-    container.animate({ scrollLeft: scrollAmount }, 500);
+    $container.animate({ scrollLeft: scrollAmount }, 500);
     iniciarAutoScroll();
   });
 
   $(".carousel-btn.prev").click(function () {
     clearInterval(autoScroll);
     scrollAmount = Math.max(scrollAmount - cardWidth, 0);
-    container.animate({ scrollLeft: scrollAmount }, 500);
+    $container.animate({ scrollLeft: scrollAmount }, 500);
     iniciarAutoScroll();
   });
 
@@ -161,11 +162,17 @@ function loadNews(rssUrl) {
   fetch(apiUrl)
     .then((response) => response.json())
     .then((data) => showNews(data.items))
-    .catch((error) => console.error("❌ Error cargando noticias:", error));
+    .catch((error) => console.error("❌ Error cargando noticias API:", error));
 }
 
 function showNews(newsItems) {
   const container = document.getElementById("news-container-api");
+
+  if (!container) {
+    console.warn("❌ news-container-api no encontrado.");
+    return;
+  }
+
   container.innerHTML = "";
 
   newsItems.slice(0, 10).forEach((item) => {
@@ -188,6 +195,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("news-container-api");
   const prevBtn = document.querySelector(".prev-api");
   const nextBtn = document.querySelector(".next-api");
+
+  if (!container || !prevBtn || !nextBtn) {
+    console.warn("❌ No se encontraron los controles del carrusel API.");
+    return;
+  }
 
   const cardWidth = 316;
   let scrollAmount = 0;
