@@ -95,10 +95,31 @@ function centrarEnMiUbicacion() {
       if (!infoWindow) {
         infoWindow = new google.maps.InfoWindow({
           content: `
-            <div style="font-weight: bold; color: #007bff; text-align: center;">
-              Aquí estás 🚀
-            </div>
-          `,
+      <div style="
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 10px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #fff;
+        background: linear-gradient(135deg, #10408a, #007bff);
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        max-width: 200px;
+      ">
+        <h3 style="
+          margin: 0;
+          font-size: 1.2rem;
+          font-weight: bold;
+        ">InnovaCode 🚀</h3>
+        <p style="
+          margin: 5px 0 0;
+          font-size: 0.9rem;
+        ">¡Aquí estás!</p>
+      </div>
+    `,
         });
       }
 
