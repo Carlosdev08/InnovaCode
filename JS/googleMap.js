@@ -109,15 +109,15 @@ function centrarEnMiUbicacion() {
         box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         max-width: 200px;
       ">
+      <p style="
+        margin: 5px 0 0;
+        font-size: 0.9rem;
+      ">¡Aquí estás!</p>
         <h3 style="
           margin: 0;
           font-size: 1.2rem;
           font-weight: bold;
         ">InnovaCode 🚀</h3>
-        <p style="
-          margin: 5px 0 0;
-          font-size: 0.9rem;
-        ">¡Aquí estás!</p>
       </div>
     `,
         });
