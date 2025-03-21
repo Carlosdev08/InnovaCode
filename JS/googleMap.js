@@ -112,6 +112,7 @@ function centrarEnMiUbicacion() {
       <p style="
         margin: 5px 0 0;
         font-size: 0.9rem;
+        text-align: center;
       ">¡Aquí estás!</p>
         <h3 style="
           margin: 0;
