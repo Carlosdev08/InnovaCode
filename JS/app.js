@@ -7,11 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const navLinks = document.querySelectorAll(".nav-links a");
   const menuToggle = document.getElementById("menu-toggle");
 
-  function scrollNavbar() {
+  const scrollNavbar = () => {
     window.scrollY > 100
       ? navbar.classList.add("nav-scroll")
       : navbar.classList.remove("nav-scroll");
-  }
+  };
 
   menuToggle.addEventListener("click", () => {
     navLinksContainer.classList.toggle("active");
@@ -52,7 +52,6 @@ $(document).ready(function () {
       titulo: "SEO Optimizado",
       descripcion: "Posicionamiento en buscadores y aumento de tráfico.",
     },
-    // Más proyectos si quieres...
   ];
 
   const container = $(".gallery-container");
@@ -62,13 +61,12 @@ $(document).ready(function () {
   const modalDesc = $("#modalDesc");
 
   proyectos.forEach((proyecto) => {
-    const card = `
+    container.append(`
       <div class="gallery-card" data-category="${proyecto.categoria}">
         <img src="${proyecto.imagen}" alt="${proyecto.titulo}" width="1024" height="1024">
         <h3>${proyecto.titulo}</h3>
         <p>${proyecto.descripcion}</p>
-      </div>`;
-    container.append(card);
+      </div>`);
   });
 
   $(".filter-btn").click(function () {
@@ -76,25 +74,18 @@ $(document).ready(function () {
     $(".filter-btn").removeClass("active");
     $(this).addClass("active");
 
-    if (categoria === "todos") {
-      $(".gallery-card").fadeIn();
-    } else {
-      $(".gallery-card").each(function () {
-        const cardCategoria = $(this).data("category");
-        cardCategoria === categoria ? $(this).fadeIn() : $(this).fadeOut();
-      });
-    }
+    $(".gallery-card").each(function () {
+      const cardCategoria = $(this).data("category");
+      categoria === "todos" || cardCategoria === categoria
+        ? $(this).fadeIn()
+        : $(this).fadeOut();
+    });
   });
 
   container.on("click", ".gallery-card", function () {
-    const imgSrc = $(this).find("img").attr("src");
-    const title = $(this).find("h3").text();
-    const desc = $(this).find("p").text();
-
-    modalImg.attr("src", imgSrc);
-    modalTitle.text(title);
-    modalDesc.text(desc);
-
+    modalImg.attr("src", $(this).find("img").attr("src"));
+    modalTitle.text($(this).find("h3").text());
+    modalDesc.text($(this).find("p").text());
     modal.fadeIn();
     $("body").css("overflow", "hidden");
   });
@@ -112,39 +103,35 @@ $(document).ready(function () {
  *******************************/
 $(document).ready(function () {
   const container = $("#news-container");
-  const cardWidth = 316; // 300px + 16px gap
+  const cardWidth = 316;
   let scrollAmount = 0;
   let autoScroll;
 
-  function cargarNoticias() {
+  const cargarNoticias = () => {
     $.getJSON("../data/news.json", function (data) {
       data.forEach((noticia) => {
-        const card = `
+        container.append(`
           <div class="news-card">
             <h3>${noticia.titulo}</h3>
             <p>${noticia.descripcion}</p>
             <span>${noticia.fecha}</span>
-          </div>`;
-        container.append(card);
+          </div>`);
       });
       iniciarAutoScroll();
-    }).fail(function () {
+    }).fail(() => {
       console.error("No se pudieron cargar las noticias.");
       container.html("<p>Error al cargar las noticias.</p>");
     });
-  }
+  };
 
-  function iniciarAutoScroll() {
+  const iniciarAutoScroll = () => {
     autoScroll = setInterval(() => {
-      const maxScrollLeft = container.length
-        ? container[0].scrollWidth - container[0].clientWidth
-        : 0;
-
+      const maxScrollLeft = container[0].scrollWidth - container[0].clientWidth;
       scrollAmount =
         scrollAmount >= maxScrollLeft ? 0 : scrollAmount + cardWidth;
       container.animate({ scrollLeft: scrollAmount }, 600);
     }, 3000);
-  }
+  };
 
   $(".carousel-btn.next").click(function () {
     clearInterval(autoScroll);
@@ -164,72 +151,69 @@ $(document).ready(function () {
 });
 
 /*******************************
- * SLIDER NOTICIAS API (GNews)
+ * SLIDER NOTICIAS API (RSS2JSON)
  *******************************/
-// $(document).ready(function () {
-//   const containerAPI = $("#news-container-api");
-//   const cardWidth = 316;
-//   let scrollAPI = 0;
-//   let autoScrollAPI;
+function loadNews(rssUrl) {
+  const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`;
 
-//   const apiKey = "1f9051fc25833d55d792fa46713c9825"; // ¡IMPORTANTE! Ponla en Google y restringe
-//   const apiUrl = `https://gnews.io/api/v4/top-headlines?lang=en&country=us&max=10&token=${apiKey}`;
+  fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => showNews(data.items))
+    .catch((error) => console.error("❌ Error cargando noticias:", error));
+}
 
-//   function loadNewsAPI() {
-//     fetch(apiUrl)
-//       .then((response) => response.json())
-//       .then((data) => {
-//         const articles = data.articles || [];
+function showNews(newsItems) {
+  const container = document.getElementById("news-container-api");
+  container.innerHTML = "";
 
-//         if (!articles.length) {
-//           containerAPI.html("<p>No hay noticias disponibles</p>");
-//           return;
-//         }
+  newsItems.slice(0, 10).forEach((item) => {
+    const { title, link, description } = item;
 
-//         containerAPI.empty();
+    const newsCard = document.createElement("div");
+    newsCard.className = "news-card";
 
-//         articles.forEach((item) => {
-//           const card = `
-//             <a href="${item.url}" target="_blank" class="news-card-link">
-//               <div class="news-card">
-//                 <h3>${item.title}</h3>
-//                 <p>${item.description || "Descripción no disponible"}</p>
-//                 <span>${new Date(item.publishedAt).toLocaleDateString()}</span>
-//               </div>
-//             </a>`;
-//           containerAPI.append(card);
-//         });
+    newsCard.innerHTML = `
+      <h3>${title}</h3>
+      <p>${description || "Sin descripción"}</p>
+      <a href="${link}" target="_blank">Leer más</a>
+    `;
 
-//         iniciarAutoScrollAPI();
-//       })
-//       .catch((error) => console.error("Error cargando noticias API:", error));
-//   }
+    container.append(newsCard);
+  });
+}
 
-//   function iniciarAutoScrollAPI() {
-//     autoScrollAPI = setInterval(() => {
-//       const maxScroll =
-//         containerAPI[0].scrollWidth - containerAPI[0].clientWidth;
-//       scrollAPI = scrollAPI >= maxScroll ? 0 : scrollAPI + cardWidth;
-//       containerAPI.animate({ scrollLeft: scrollAPI }, 600);
-//     }, 3000);
-//   }
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("news-container-api");
+  const prevBtn = document.querySelector(".prev-api");
+  const nextBtn = document.querySelector(".next-api");
 
-//   $(".next-api").click(function () {
-//     clearInterval(autoScrollAPI);
-//     scrollAPI += cardWidth;
-//     containerAPI.animate({ scrollLeft: scrollAPI }, 500);
-//     iniciarAutoScrollAPI();
-//   });
+  const cardWidth = 316;
+  let scrollAmount = 0;
 
-//   $(".prev-api").click(function () {
-//     clearInterval(autoScrollAPI);
-//     scrollAPI = Math.max(scrollAPI - cardWidth, 0);
-//     containerAPI.animate({ scrollLeft: scrollAPI }, 500);
-//     iniciarAutoScrollAPI();
-//   });
+  prevBtn.addEventListener("click", () => {
+    scrollAmount = Math.max(scrollAmount - cardWidth, 0);
+    container.scrollTo({ left: scrollAmount, behavior: "smooth" });
+  });
 
-//   loadNewsAPI();
-// });
+  nextBtn.addEventListener("click", () => {
+    scrollAmount = Math.min(
+      scrollAmount + cardWidth,
+      container.scrollWidth - container.clientWidth
+    );
+    container.scrollTo({ left: scrollAmount, behavior: "smooth" });
+  });
+
+  // Auto-scroll
+  setInterval(() => {
+    scrollAmount += cardWidth;
+    if (scrollAmount >= container.scrollWidth - container.clientWidth) {
+      scrollAmount = 0;
+    }
+    container.scrollTo({ left: scrollAmount, behavior: "smooth" });
+  }, 3000);
+
+  loadNews("https://news.google.com/rss");
+});
 
 /*******************************
  * GOOGLE MAPS + DIRECTIONS
@@ -243,23 +227,11 @@ import {
 } from "./placesAutocomplete.js";
 
 $(document).ready(function () {
-  console.log("DOM listo para Google Maps");
-
-  const startMap = () => {
-    initMap();
-    initAutocomplete();
-
-$(document).ready(function () {
-  console.log("DOM listo para Google Maps");
-
   const startMap = () => {
     initMap();
     initAutocomplete();
 
     $("#btnCalcularRuta").on("click", () => {
-      console.log("OrigenPlace:", origenPlace);
-      console.log("DestinoPlace:", destinoPlace);
-
       if (!origenPlace || !destinoPlace) {
         alert(
           "Por favor, selecciona el origen y el destino desde las sugerencias."
@@ -282,28 +254,4 @@ $(document).ready(function () {
       }
     });
   }
-});
-
-  };
-  
-
-  if (typeof google !== "undefined" && google.maps) {
-    startMap();
-  } else {
-    console.warn("Esperando a que Google Maps cargue...");
-    window.addEventListener("load", () => {
-      if (typeof google !== "undefined" && google.maps) {
-        startMap();
-      } else {
-        console.error("Google Maps API no se ha cargado.");
-      }
-    });
-  }
-});
-
-const cerrarDialogBtn = document.getElementById("cerrarDialog");
-
-cerrarDialogBtn.addEventListener("click", () => {
-  const dialog = document.getElementById("mapDialog");
-  if (dialog) dialog.close();
 });
