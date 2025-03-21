@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="CSS/style.css">
 </head>
 
-<body>
+<body class="home-page">
 
     <!-- HEADER / NAVBAR -->
     <header class="site-header">
@@ -92,38 +92,39 @@
 
 
         <!-- Galería Section -->
-        <!-- Galería Section (index.html solo 4 proyectos) -->
-        <section class="projects-gallery-home">
+        <section class="home-projects-gallery">
             <h2>Nuestros Proyectos</h2>
-            <div class="projects-home-container">
-                <div class="project-card">
+
+            <div class="home-projects-container">
+                <div class="home-project-card">
                     <img src="./assets/images/item1.jpeg" alt="Proyecto Tienda Virtual" width="600" height="600">
                     <h3>Tienda Virtual</h3>
                     <p>Desarrollo de ecommerce adaptable a dispositivos móviles.</p>
                 </div>
 
-                <div class="project-card">
+                <div class="home-project-card">
                     <img src="./assets/images/item2.jpeg" alt="Proyecto Landing Page" width="600" height="600">
                     <h3>Landing Page</h3>
                     <p>Diseño limpio y moderno para captar clientes potenciales.</p>
                 </div>
 
-                <div class="project-card">
+                <div class="home-project-card">
                     <img src="./assets/images/posicionamientoSeo.webp" alt="Gestor de Proyectos" width="600"
                         height="600">
                     <h3>Gestor de Proyectos</h3>
                     <p>Plataforma de gestión de tareas en tiempo real.</p>
                 </div>
 
-                <div class="project-card">
+                <div class="home-project-card">
                     <img src="./assets/images/mantenimientoWeb.jpeg" alt="Mantenimiento Web" width="600" height="600">
                     <h3>Mantenimiento Web</h3>
                     <p>Actualización, soporte y seguridad continua para tu página web.</p>
                 </div>
             </div>
 
-            <a href="./views/galeria.html" class="btn btn-primary">Ver más proyectos</a>
+            <a href="./views/galeria.html" class="btn btn-primary btn-home">Ver más proyectos</a>
         </section>
+
 
 
         <!-- CTA Contacto -->
@@ -147,21 +148,26 @@
         </section>
 
         <!-- Section de noticia con la api -->
-<section class="news-section-api api-new">
-    <h2>Últimas Noticias desde API</h2>
+        <section class="news-section-api api-new">
+            <h2>Últimas Noticias desde API</h2>
 
-    <div id="news-api-carousel-wrapper" class="carousel-wrapper">
+            <div id="news-api-carousel-wrapper" class="carousel-wrapper">
 
-        <button class="prev-api carousel-api-btn">‹</button>
+                <button class="prev-api carousel-api-btn">
+                    <img src="./assets/images/chevron-left-svgrepo-com.svg.svg" alt="left">
+                </button>
 
-        <div id="news-container-api" class="news-api-container">
-            <!-- Noticias dinámicas -->
-        </div>
 
-        <button class="next-api carousel-api-btn">›</button>
 
-    </div>
-</section>
+                <div id="news-container-api" class="news-api-container">
+                    <!-- Noticias dinámicas -->
+                </div>
+
+                <button class="next-api carousel-api-btn">
+                    <img src="./assets/images/chevron-right-svgrepo-com.svg" alt="Siguiente" />
+                </button>
+            </div>
+        </section>
 
 
     </main>

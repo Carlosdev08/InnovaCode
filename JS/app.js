@@ -2,10 +2,34 @@
  * NAVBAR Y MENÚ SCROLL EFFECT
  *******************************/
 document.addEventListener("DOMContentLoaded", () => {
+
+  
   const navbar = document.querySelector(".navbar");
   const navLinksContainer = document.getElementById("nav-links");
   const navLinks = document.querySelectorAll(".nav-links a");
   const menuToggle = document.getElementById("menu-toggle");
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.getElementById("menu-toggle");
+  const navLinksContainer = document.getElementById("nav-links");
+
+  if (!menuToggle || !navLinksContainer) {
+    console.warn("❌ No se encontró el menú o los enlaces.");
+    return;
+  }
+
+  menuToggle.addEventListener("click", () => {
+    navLinksContainer.classList.toggle("active");
+  });
+
+  const navLinks = navLinksContainer.querySelectorAll("a");
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      navLinksContainer.classList.remove("active");
+    });
+  });
+});
+
 
   const scrollNavbar = () => {
     window.scrollY > 100
@@ -29,73 +53,51 @@ document.addEventListener("DOMContentLoaded", () => {
   scrollNavbar();
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const body = document.body;
+
+  if (body.classList.contains("home-page")) {
+    initHomePage();
+  }
+
+  if (body.classList.contains("galeria-page")) {
+    initGaleriaPage();
+  }
+
+  if (body.classList.contains("contacto-page")) {
+    initContactoPage();
+  }
+
+  if (body.classList.contains("presupuesto-page")) {
+    initPresupuestoPage();
+  }
+});
+
 /*******************************
  * GALERÍA, FILTROS Y MODAL
  *******************************/
 $(document).ready(function () {
-  const proyectos = [
-    {
-      categoria: "web",
-      imagen: "../assets/images/item1.jpeg",
-      titulo: "Tienda Online",
-      descripcion: "Desarrollo completo de e-commerce.",
-    },
-    {
-      categoria: "apps",
-      imagen: "../assets/images/item2.jpeg",
-      titulo: "App de Gestión",
-      descripcion: "App para administración de tareas y productividad.",
-    },
-    {
-      categoria: "seo",
-      imagen: "../assets/images/posicionamientoSeo.webp",
-      titulo: "SEO Optimizado",
-      descripcion: "Posicionamiento en buscadores y aumento de tráfico.",
-    },
-  ];
+  if ($(".gallery-container").length > 0) {
+    console.log("🎨 Galería detectada");
 
-  const container = $(".gallery-container");
-  const modal = $("#projectModal");
-  const modalImg = $("#modalImg");
-  const modalTitle = $("#modalTitle");
-  const modalDesc = $("#modalDesc");
+    $(".filter-btn").click(function () {
+      const categoria = $(this).data("filter");
+      console.log("🔎 Filtrando categoría:", categoria);
 
-  proyectos.forEach((proyecto) => {
-    container.append(`
-      <div class="gallery-card" data-category="${proyecto.categoria}">
-        <img src="${proyecto.imagen}" alt="${proyecto.titulo}" width="1024" height="1024">
-        <h3>${proyecto.titulo}</h3>
-        <p>${proyecto.descripcion}</p>
-      </div>`);
-  });
+      $(".filter-btn").removeClass("active");
+      $(this).addClass("active");
 
-  $(".filter-btn").click(function () {
-    const categoria = $(this).data("filter");
-    $(".filter-btn").removeClass("active");
-    $(this).addClass("active");
+      $(".gallery-card").each(function () {
+        const cardCategoria = $(this).data("category");
 
-    $(".gallery-card").each(function () {
-      const cardCategoria = $(this).data("category");
-      categoria === "todos" || cardCategoria === categoria
-        ? $(this).fadeIn()
-        : $(this).fadeOut();
+        if (categoria === "todos" || cardCategoria === categoria) {
+          $(this).fadeIn(300);
+        } else {
+          $(this).fadeOut(300);
+        }
+      });
     });
-  });
-
-  container.on("click", ".gallery-card", function () {
-    modalImg.attr("src", $(this).find("img").attr("src"));
-    modalTitle.text($(this).find("h3").text());
-    modalDesc.text($(this).find("p").text());
-    modal.fadeIn();
-    $("body").css("overflow", "hidden");
-  });
-
-  $(".close, #projectModal").click(function (e) {
-    if ($(e.target).is("#projectModal") || $(e.target).hasClass("close")) {
-      modal.fadeOut();
-      $("body").css("overflow", "auto");
-    }
-  });
+  }
 });
 
 /*******************************
@@ -213,45 +215,4 @@ document.addEventListener("DOMContentLoaded", () => {
   }, 3000);
 
   loadNews("https://news.google.com/rss");
-});
-
-/*******************************
- * GOOGLE MAPS + DIRECTIONS
- *******************************/
-import initMap from "./googleMap.js";
-import { calcularRuta } from "./direction.js";
-import {
-  initAutocomplete,
-  origenPlace,
-  destinoPlace,
-} from "./placesAutocomplete.js";
-
-$(document).ready(function () {
-  const startMap = () => {
-    initMap();
-    initAutocomplete();
-
-    $("#btnCalcularRuta").on("click", () => {
-      if (!origenPlace || !destinoPlace) {
-        alert(
-          "Por favor, selecciona el origen y el destino desde las sugerencias."
-        );
-        return;
-      }
-
-      calcularRuta(origenPlace.location, destinoPlace.location);
-    });
-  };
-
-  if (typeof google !== "undefined" && google.maps) {
-    startMap();
-  } else {
-    window.addEventListener("load", () => {
-      if (typeof google !== "undefined" && google.maps) {
-        startMap();
-      } else {
-        console.error("Google Maps API no se ha cargado.");
-      }
-    });
-  }
 });

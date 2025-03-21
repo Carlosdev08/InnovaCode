@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../CSS/style.css" >
 </head>
 
-<body class="bannerGalery">
+<body class="bannerGalery galeria-page">
     <!-- HEADER -->
     <header class="site-header">
         <nav class="navbar">
@@ -25,7 +25,10 @@
                 <li><a href="./contacto.html">Contacto</a></li>
             </ul>
 
-            <div class="menu-toggle" id="menu-toggle">☰</div>
+        <div class="menu-toggle" id="menu-toggle">☰</div>
+        
+      
+
         </nav>
     </header>
 
@@ -127,9 +130,13 @@
     </section>
     <div class="modal" id="projectModal">
         <div class="modal-content">
-            
+            <span class="close"></span>
+            <img id="modalImg" class="logoGalerry" src="../assets/images/logoEmpresa.jpeg" alt="logo" />
+            <h3 id="modalTitle"></h3>
+            <p id="modalDesc"></p>
         </div>
     </div>
+
 
     <!-- FOOTER -->
     <footer class="footer">
@@ -142,8 +149,9 @@
     </footer>
 
     <!-- JS -->
-     <script src="../JS/jquery-3.7.1.min.js"></script>
-    <script src="../JS/app.js"></script>
+    <script src="../JS/jquery-3.7.1.min.js"></script>
+    <script type="module" src="../JS/app.js"></script>
+
 </body>
 
 </html>
