@@ -2,32 +2,29 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
     <title>Presupuesto | InnovaCode</title>
-    <link rel="stylesheet" href="../CSS/style.css" />
+    <link rel="stylesheet" href="../CSS/style.css" >
 </head>
 
 <body class="presupuesto-page">
     <!-- Header -->
     <header class="site-header">
         <nav class="navbar">
-            <!-- Logo -->
             <div class="logo-container">
                 <a href="../index.html" class="logo" title="InnovaCode Home">
-                    <img src="../assets/images/logoEmpresa.jpeg" alt="Logo InnovaCode" />
+                    <img src="../assets/images/logoEmpresa.jpeg" alt="Logo InnovaCode" >
                 </a>
             </div>
 
-            <!-- Menú navegación -->
-            <ul class="nav-links" id="nav-links">
+            <ul class="nav-links">
                 <li><a href="../index.html">Inicio</a></li>
                 <li><a href="./galeria.html">Galería</a></li>
                 <li><a href="./presupuesto.html" class="active">Presupuestos</a></li>
                 <li><a href="./contacto.html">Contacto</a></li>
             </ul>
 
-            <!-- Icono hamburguesa -->
             <div class="menu-toggle" id="menu-toggle">☰</div>
         </nav>
     </header>
@@ -37,77 +34,107 @@
         <section class="budget-section">
             <h2>Formulario de Presupuesto</h2>
 
-            <form action="#" id="budget-form" class="budget-form" method="POST" enctype="multipart/form-data">
+            <form id="budget-form" class="budget-form" method="POST" enctype="multipart/form-data">
 
-                <!-- Nombre -->
-                <label for="name">Nombre:</label>
-                <input type="text" id="name" name="name" placeholder="Escribe tu nombre" maxlength="15"
-                    pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ ]+" required>
+                <!-- Información Personal -->
+                <fieldset>
+                    <legend>Información Personal</legend>
 
-                <!-- Apellidos -->
-                <label for="surname">Apellidos:</label>
-                <input type="text" id="surname" name="surname" placeholder="Escribe tus apellidos" maxlength="40"
-                    pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ ]+" required>
+                    <label for="name">Nombre:</label>
+                    <input type="text" id="name" name="name" placeholder="Escribe tu nombre" maxlength="15"
+                        pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ ]+" required>
 
-                <!-- Teléfono -->
-                <label for="phone">Teléfono:</label>
-                <input type="tel" id="phone" name="phone" placeholder="Tu teléfono" maxlength="9" pattern="[0-9]{9}"
-                    required>
+                    <label for="surname">Apellidos:</label>
+                    <input type="text" id="surname" name="surname" placeholder="Escribe tus apellidos" maxlength="40"
+                        pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ ]+" required>
 
-                <!-- Email -->
-                <label for="email">Correo Electrónico:</label>
-                <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" required>
+                    <label for="phone">Teléfono:</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Tu teléfono" maxlength="9" pattern="[0-9]{9}"
+                        required>
 
-                <!-- Servicio -->
-                <label for="service">Selecciona el servicio:</label>
-                <select id="service" name="service" required>
-                    <option value="">-- Selecciona --</option>
-                    <option value="web">Desarrollo Web</option>
-                    <option value="app">Aplicaciones Móviles</option>
-                    <option value="consulting">Consultoría Tecnológica</option>
-                </select>
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" required>
+                </fieldset>
 
-                <!-- Descripción -->
-                <label for="description">Descripción del Proyecto:</label>
-                <textarea id="description" name="description" rows="5" placeholder="Cuéntanos los detalles..."
-                    required></textarea>
+                <!-- Detalles del Proyecto -->
+                <fieldset>
+                    <legend>Detalles del Proyecto</legend>
 
-                <!-- Fecha estimada de inicio -->
-                <label for="start-date">Fecha estimada de inicio:</label>
-                <input type="date" id="start-date" name="start-date" required>
+                    <label for="service">Selecciona el servicio:</label>
+                    <select id="service" name="service" required>
+                        <option value="">-- Selecciona --</option>
+                        <option value="web">Desarrollo Web</option>
+                        <option value="app">Aplicaciones Móviles</option>
+                        <option value="consulting">Consultoría Tecnológica</option>
+                    </select>
 
-                <!-- Presupuesto estimado -->
-                <label for="budget">Presupuesto estimado (€):</label>
-                <input type="number" id="budget" name="budget" min="100" step="50" placeholder="Ejemplo: 500" required>
+                    <label for="description">Descripción del Proyecto:</label>
+                    <textarea id="description" name="description" rows="5" placeholder="Cuéntanos los detalles..."
+                        required></textarea>
 
-                <!-- Tipo de cliente -->
-                <label for="client-type">Tipo de cliente:</label>
-                <select id="client-type" name="client-type" required>
-                    <option value="">-- Selecciona --</option>
-                    <option value="empresa">Empresa</option>
-                    <option value="particular">Particular</option>
-                </select>
+                    <label for="start-date">Fecha estimada de inicio:</label>
+                    <input type="date" id="start-date" name="start-date" required>
 
-                <!-- Urgencia -->
-                <label for="urgency">Urgencia:</label>
-                <select id="urgency" name="urgency" required>
-                    <option value="">-- Selecciona --</option>
-                    <option value="baja">Baja</option>
-                    <option value="media">Media</option>
-                    <option value="alta">Alta</option>
-                </select>
+                    <label for="budget">Presupuesto base (€):</label>
+                    <input type="number" id="budget" name="budget" min="100" step="50" placeholder="Ejemplo: 500"
+                        required>
 
-                <!-- Adjuntar archivo -->
-                <label for="file">Adjuntar archivo (opcional):</label>
-                <input type="file" id="file" name="file" accept=".pdf,.jpg,.jpeg,.png">
+                    <label for="client-type">Tipo de cliente:</label>
+                    <select id="client-type" name="client-type" required>
+                        <option value="">-- Selecciona --</option>
+                        <option value="empresa">Empresa</option>
+                        <option value="particular">Particular</option>
+                    </select>
 
-                <!-- Checkbox términos -->
-                <div class="terms-container">
-                    <input type="checkbox" id="terms" name="terms" required>
-                    <label for="terms">Acepto los <a href="../views/terminos.html" target="_blank">términos y
-                            condiciones</a> y
-                        la <a href="../views/privacidad.html" target="_blank">política de privacidad</a>.</label>
+                    <label for="urgency">Urgencia:</label>
+                    <select id="urgency" name="urgency" required>
+                        <option value="">-- Selecciona --</option>
+                        <option value="baja">Baja</option>
+                        <option value="media">Media</option>
+                        <option value="alta">Alta</option>
+                    </select>
+                </fieldset>
+
+                <!-- Servicios Adicionales -->
+                <fieldset>
+                    <legend>Servicios adicionales</legend>
+
+                <div class="checkbox-group">
+                    <label><input type="checkbox" class="extra-option" value="100" data-label="SEO"> SEO (+100€)</label>
+                    <label><input type="checkbox" class="extra-option" value="50" data-label="Hosting"> Hosting (+50€)</label>
+                    <label><input type="checkbox" class="extra-option" value="150" data-label="Soporte Técnico"> Soporte Técnico
+                        (+150€)</label>
+                    <label><input type="checkbox" class="extra-option" value="200" data-label="Mantenimiento"> Mantenimiento
+                        (+200€)</label>
+                    <label><input type="checkbox" class="extra-option" value="300" data-label="Marketing Digital"> Marketing Digital
+                        (+300€)</label>
+                    <label><input type="checkbox" class="extra-option" value="250" data-label="Análisis de Datos"> Análisis de Datos
+                        (+250€)</label>
+                    <label><input type="checkbox" class="extra-option" value="120" data-label="Gestión de Redes Sociales"> Gestión de
+                        Redes Sociales (+120€)</label>
+                    <label><input type="checkbox" class="extra-option" value="180" data-label="Formación Online"> Formación Online
+                        (+180€)</label>
                 </div>
+
+
+                    <p id="totalPrice">Total estimado: 0 €</p>
+                </fieldset>
+                <div id="modal-container"></div>
+
+                <!-- Adjuntos y Términos -->
+                <fieldset>
+                    <legend>Adjuntos y Términos</legend>
+
+                    <label for="file">Adjuntar archivo (opcional):</label>
+                    <input type="file" id="file" name="file" accept=".pdf,.jpg,.jpeg,.png">
+
+                    <div class="terms-container">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">Acepto los <a href="../views/terminos.html" target="_blank">términos y
+                                condiciones</a> y la <a href="../views/privacidad.html" target="_blank">política de
+                                privacidad</a>.</label>
+                    </div>
+                </fieldset>
 
                 <!-- Botones -->
                 <div class="button-group">
@@ -122,7 +149,7 @@
         <div id="formModal" class="form-modal">
             <div class="form-modal-content">
                 <span class="form-close"></span>
-                <h3 id="formModalTitle"></h3>
+                <p id="formModalTitle"></p>
                 <p id="formModalText"></p>
             </div>
         </div>
@@ -137,10 +164,11 @@
             <a href="#">LinkedIn</a>
         </div>
     </footer>
-        <script src="../JS/app.js"></script>
-        <script src="../JS/form-validation.js"></script>
 
-   
+    <script src="../JS/jquery-3.7.1.min.js"></script>
+    <script src="../JS/app.js"></script>
+    <script src="../JS/form-validation.js"></script>
+
 </body>
 
 </html>
