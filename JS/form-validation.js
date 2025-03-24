@@ -168,16 +168,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const formContainer = document.querySelector(".budget-section");
 
   function mostrarModalUrgency(message, onConfirm, onCancel) {
-    const existingModal = document.querySelector(".modal-custom");
+    const existingModal = document.querySelector(".modal-presupuesto");
     if (existingModal) {
       existingModal.remove();
     }
 
     const modal = document.createElement("div");
-    modal.classList.add("modal-custom");
+    modal.classList.add("modal-presupuesto");
 
     modal.innerHTML = `
-      <div class="modal-content-custom">
+      <div class="modal-content-presupuesto">
         <h3>Notificación importante💡</h3>
         <p>${message}</p>
         <div class="modal-btn">
