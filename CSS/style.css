@@ -990,30 +990,66 @@ legend {
 /* ==== SERVICIOS EXTRA ==== */
 /* ========================= */
 .modal-custom {
-  position: fixed; /* Ahora es relativo al contenedor, no flotante */
-  margin-top: 20px;
-  padding: 1rem;
-  border: 1px solid #007bff;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  max-width: 400px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-content-custom {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  background-color: white;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: fadeIn 0.3s ease;
 }
 
 .modal-btn {
+  margin-top: 1.5rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  gap: 1rem;
 }
 
 .modal-btn button {
   padding: 0.5rem 1rem;
   border: none;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+#confirmBtn {
+  background-color: #007bff;
+  color: white;
+}
+
+#cancelBtn {
+  background-color: #ccc;
+  color: black;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .checkbox-group {
