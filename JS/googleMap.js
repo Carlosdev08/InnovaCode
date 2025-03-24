@@ -8,16 +8,14 @@ let userMarker = null;
 let infoWindow = null;
 
 let origenAutocomplete = null;
-let destinoAutocomplete = null;
-
 let origenPlace = null;
-let destinoPlace = null;
+
+const direccionEmpresa = { lat: 40.4168, lng: -3.7038 }; // Tu empresa
 
 // ============================
 // INICIALIZAR MAPA
 // ============================
 function initMap() {
-  const defaultLocation = { lat: 40.4168, lng: -3.7038 }; // Madrid
   const mapElement = document.getElementById("map");
 
   if (!mapElement) {
@@ -27,42 +25,41 @@ function initMap() {
 
   mapInstance = new google.maps.Map(mapElement, {
     zoom: 15,
-    center: defaultLocation,
+    center: direccionEmpresa,
   });
 
   directionsRenderer = new google.maps.DirectionsRenderer();
   directionsService = new google.maps.DirectionsService();
-
   directionsRenderer.setMap(mapInstance);
 
-  console.log("✅ Mapa y DirectionsRenderer inicializados.");
+  console.log("✅ Mapa inicializado");
 
-  const btnUbicacion = document.getElementById("btnMiUbicacion");
-  if (btnUbicacion) {
-    btnUbicacion.addEventListener("click", centrarEnMiUbicacion);
-  }
+  document.getElementById("btnMiUbicacion").addEventListener("click", () => {
+    centrarEnMiUbicacion(() => {
+      calcularRuta(userMarker.getPosition(), direccionEmpresa);
+    });
+  });
 
   initAutocomplete();
 
-  const btnCalcularRuta = document.getElementById("btnCalcularRuta");
-  if (btnCalcularRuta) {
-    btnCalcularRuta.addEventListener("click", () => {
-      if (!origenPlace || !destinoPlace) {
-        alert(
-          "Por favor, selecciona el origen y el destino desde las sugerencias."
-        );
-        return;
-      }
-
-      calcularRuta(origenPlace.location, destinoPlace.location);
-    });
-  }
+  document.getElementById("btnCalcularRuta").addEventListener("click", () => {
+    if (origenPlace) {
+      calcularRuta(origenPlace.location, direccionEmpresa);
+    } else if (userMarker) {
+      mostrarModalConfirmacion(
+        "¿Quieres calcular la ruta desde tu ubicación actual?",
+        () => calcularRuta(userMarker.getPosition(), direccionEmpresa)
+      );
+    } else {
+      alert("Selecciona un origen o usa tu ubicación actual.");
+    }
+  });
 }
 
 // ============================
 // CENTRAR EN MI UBICACIÓN
 // ============================
-function centrarEnMiUbicacion() {
+function centrarEnMiUbicacion(callback) {
   if (!navigator.geolocation) {
     mostrarDialogoError();
     return;
@@ -109,11 +106,11 @@ function centrarEnMiUbicacion() {
         box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         max-width: 200px;
       ">
-      <p style="
-        margin: 5px 0 0;
-        font-size: 0.9rem;
-        text-align: center;
-      ">¡Aquí estás!</p>
+        <p style="
+          margin: 5px 0 0;
+          font-size: 0.9rem;
+          text-align: center;
+        ">¡Aquí estás!</p>
         <h3 style="
           margin: 0;
           font-size: 1.2rem;
@@ -128,7 +125,9 @@ function centrarEnMiUbicacion() {
         infoWindow.open(mapInstance, userMarker);
       });
 
-      console.log("📍 Ubicación actual mostrada en el mapa:", userLocation);
+      console.log("📍 Ubicación actual centrada:", userLocation);
+
+      if (callback) callback(); // Llama a la función después de obtener la ubicación
     },
     (error) => {
       console.error("❌ Error obteniendo ubicación:", error.message);
@@ -143,19 +142,17 @@ function mostrarDialogoError() {
 }
 
 // ============================
-// AUTOCOMPLETADO ORIGEN / DESTINO
+// AUTOCOMPLETADO ORIGEN
 // ============================
 function initAutocomplete() {
   const inputOrigen = document.getElementById("origen");
-  const inputDestino = document.getElementById("destino");
 
-  if (!inputOrigen || !inputDestino) {
-    console.warn("⚠️ No se encontraron los inputs de origen/destino.");
+  if (!inputOrigen) {
+    console.warn("⚠️ No se encontró el input de origen.");
     return;
   }
 
   origenAutocomplete = new google.maps.places.Autocomplete(inputOrigen);
-  destinoAutocomplete = new google.maps.places.Autocomplete(inputDestino);
 
   origenAutocomplete.addListener("place_changed", () => {
     const place = origenAutocomplete.getPlace();
@@ -168,48 +165,25 @@ function initAutocomplete() {
       location: place.geometry.location,
       name: place.name,
     };
-
-    console.log("✅ Origen seleccionado:", origenPlace);
-  });
-
-  destinoAutocomplete.addListener("place_changed", () => {
-    const place = destinoAutocomplete.getPlace();
-    if (!place.geometry) {
-      alert("No se encontró la ubicación de destino.");
-      return;
-    }
-
-    destinoPlace = {
-      location: place.geometry.location,
-      name: place.name,
-    };
-
-    console.log("✅ Destino seleccionado:", destinoPlace);
   });
 }
 
 // ============================
-// CALCULAR RUTA ENTRE PUNTOS
+// CALCULAR RUTA
 // ============================
 function calcularRuta(origen, destino) {
-  if (!directionsService || !directionsRenderer) {
-    console.error(
-      "❌ DirectionsService o DirectionsRenderer no inicializados."
-    );
-    return;
-  }
+  const modo = document.getElementById("modoTransporte")?.value || "DRIVING";
 
   const request = {
     origin: origen,
     destination: destino,
-    travelMode: google.maps.TravelMode.DRIVING,
+    travelMode: google.maps.TravelMode[modo],
   };
 
   directionsService.route(request, (result, status) => {
     if (status === google.maps.DirectionsStatus.OK) {
       directionsRenderer.setDirections(result);
       mostrarInfoRuta(result);
-      console.log("🚗 Ruta calculada correctamente");
     } else {
       console.error("❌ No se pudo calcular la ruta:", status);
       alert("No se pudo calcular la ruta. Intenta de nuevo.");
@@ -232,12 +206,44 @@ function mostrarInfoRuta(result) {
 }
 
 // ============================
-// ESPERAR A CARGAR GOOGLE MAPS Y LA PÁGINA
+// MODAL CONFIRMACIÓN REUTILIZABLE
+// ============================
+function mostrarModalConfirmacion(message, onConfirm) {
+  const existingModal = document.querySelector(".modal-custom");
+  if (existingModal) existingModal.remove();
+
+  const modal = document.createElement("div");
+  modal.classList.add("modal-custom");
+  modal.innerHTML = `
+    <div class="modal-content-custom">
+      <h3>🗺️ Confirmación</h3>
+      <p>${message}</p>
+      <div class="modal-btn">
+        <button id="confirmBtn">Aceptar</button>
+        <button id="cancelBtn">Cancelar</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  modal.querySelector("#confirmBtn").addEventListener("click", () => {
+    onConfirm();
+    modal.remove();
+  });
+
+  modal.querySelector("#cancelBtn").addEventListener("click", () => {
+    modal.remove();
+  });
+}
+
+// ============================
+// INICIO
 // ============================
 window.addEventListener("load", () => {
   if (typeof google !== "undefined" && google.maps) {
     initMap();
   } else {
-    console.error("❌ Google Maps API no se ha cargado correctamente.");
+    console.error("❌ Google Maps API no cargada.");
   }
 });

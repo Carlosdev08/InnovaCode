@@ -10,27 +10,27 @@
 
 <body class="contact-page">
     <!-- HEADER EMPRESA -->
-<header class="site-header">
-    <nav class="navbar">
-        <!-- Logo -->
-        <div class="logo-container">
-            <a href="../index.html" class="logo" title="InnovaCode Home">
-                <img src="../assets/images/logoEmpresa.jpeg" alt="Logo InnovaCode" />
-            </a>
-        </div>
+    <header class="site-header">
+        <nav class="navbar">
+            <!-- Logo -->
+            <div class="logo-container">
+                <a href="../index.html" class="logo" title="InnovaCode Home">
+                    <img src="../assets/images/logoEmpresa.jpeg" alt="Logo InnovaCode" >
+                </a>
+            </div>
 
-        <!-- Icono hamburguesa -->
-        <div class="menu-toggle" id="menu-toggle">☰</div>
+            <!-- Icono hamburguesa -->
+            <div class="menu-toggle" id="menu-toggle">☰</div>
 
-        <!-- Menú navegación -->
-        <ul class="nav-links" id="nav-links">
-            <li><a href="../index.html">Inicio</a></li>
-            <li><a href="./galeria.html">Galería</a></li>
-            <li><a href="./presupuesto.html">Presupuestos</a></li>
-            <li><a href="./contacto.html" class="active">Contacto</a></li>
-        </ul>
-    </nav>
-</header>
+            <!-- Menú navegación -->
+            <ul class="nav-links" id="nav-links">
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="./galeria.html">Galería</a></li>
+                <li><a href="./presupuesto.html">Presupuestos</a></li>
+                <li><a href="./contacto.html" class="active">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
 
 
     <!-- MAIN -->
@@ -83,10 +83,17 @@
 
             <!-- Inputs para calcular ruta -->
             <div id="rutas" class="rutas-container">
-                <input type="text" id="origen" placeholder="Escribe tu ubicación" />
-                <input type="text" id="destino" placeholder="Destino (Ej. Madrid, España)" />
+                <input type="text" id="origen" placeholder="Escribe tu ubicación" >
+                <input type="text" id="destino" placeholder="Destino (Ej. Madrid, España)" >
                 <button id="btnCalcularRuta" class="btn btn-primary">Calcular Ruta</button>
             </div>
+            <select id="modoTransporte" title="trans">
+                <option value="DRIVING">En coche</option>
+                <option value="WALKING">A pie</option>
+                <option value="BICYCLING">En bici</option>
+                <option value="TRANSIT">Transporte público</option>
+            </select>
+
 
             <!-- Info de la ruta calculada -->
             <div id="infoRuta">Aquí aparecerán la distancia y duración de tu ruta...</div>
@@ -101,7 +108,7 @@
         <div id="formModal" class="form-modal">
             <div class="form-modal-content">
                 <span class="form-close"></span>
-                <h3 id="formModalTitle"></h3>
+                <h3 id="formModalTitle">Información</h3>
                 <p id="formModalText"></p>
             </div>
         </div>
