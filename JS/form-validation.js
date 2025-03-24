@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
 
-    formContainer.append(modal);
+    document.body.append(modal);
 
     const confirmBtn = modal.querySelector("#confirmUrgencyBtn");
     const cancelBtn = modal.querySelector("#cancelUrgencyBtn");

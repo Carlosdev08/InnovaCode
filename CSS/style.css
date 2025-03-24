@@ -681,7 +681,7 @@ body {
 .form-modal {
   display: none;
   position: fixed;
-  z-index: 2000; /* Mayor que el modal de galería */
+  z-index: 2000; 
   left: 0;
   top: 0;
   width: 100%;
@@ -908,7 +908,7 @@ body {
 .budget-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; /* Separación uniforme entre campos */
+  gap: 1.5rem; 
 }
 
 .budget-form label {
